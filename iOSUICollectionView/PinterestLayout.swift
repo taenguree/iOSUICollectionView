@@ -28,7 +28,7 @@ class PinterestLayout: UICollectionViewLayout {
  
     override var collectionViewContentSize: CGSize {
         get {
-            return collectionView?.bounds.size ?? CGSize(width: width, height: contentHeight)
+            return CGSize(width: width, height: contentHeight)
         }
     }
     
@@ -56,10 +56,10 @@ class PinterestLayout: UICollectionViewLayout {
                 
                 cache.append(attributes)
                 
-                contentHeight = max(contentHeight, frame.height)
+                contentHeight = max(contentHeight, frame.maxY)
                 
                 yOffsets[column] = yOffsets[column] + height
-                
+
                 if column >= (numberOfColumns - 1) {
                     column = 0
                 } else {
