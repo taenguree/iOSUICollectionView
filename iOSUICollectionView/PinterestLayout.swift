@@ -21,18 +21,48 @@ class PinterestLayout: UICollectionViewLayout {
     private var cache = [UICollectionViewLayoutAttributes]()
     private var contentHeight: CGFloat = 0
     private var width: CGFloat {
-        get {
-            return collectionView!.bounds.width
-        }
+        return collectionView!.bounds.width
     }
  
     override var collectionViewContentSize: CGSize {
-        get {
-            return CGSize(width: width, height: contentHeight)
-        }
+        return CGSize(width: width, height: contentHeight)
     }
     
     override func prepare() {
+        calculate(shouldConsiderCache: true)
+    }
+    
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        var layoutAttributes = [UICollectionViewLayoutAttributes]()
+        
+        for attributes in cache {
+            if attributes.frame.intersects(rect) {
+                layoutAttributes.append(attributes)
+            }
+        }
+        
+        return layoutAttributes
+    }
+    
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        return cache[indexPath.item]
+    }
+
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        if let oldBounds = self.collectionView?.bounds, oldBounds.size != newBounds.size {
+            calculate(shouldConsiderCache: false)
+            
+            return true
+        }
+            
+        return super.shouldInvalidateLayout(forBoundsChange: newBounds)
+    }
+    
+    private func calculate(shouldConsiderCache: Bool) {
+        if (shouldConsiderCache) {
+            cache = [UICollectionViewLayoutAttributes]()
+        }
+        
         if cache.isEmpty {
             let columnWidth = width / CGFloat(numberOfColumns)
             
@@ -67,22 +97,6 @@ class PinterestLayout: UICollectionViewLayout {
                 }
             }
         }
-    }
-    
-    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        var layoutAttributes = [UICollectionViewLayoutAttributes]()
-        
-        for attributes in cache {
-            if attributes.frame.intersects(rect) {
-                layoutAttributes.append(attributes)
-            }
-        }
-        
-        return layoutAttributes
-    }
-    
-    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return cache[indexPath.item]
     }
     
 }
