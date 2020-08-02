@@ -29,7 +29,7 @@ class PinterestLayout: UICollectionViewLayout {
     }
     
     override func prepare() {
-        calculate(shouldConsiderCache: true)
+        calculateAttributes(shouldConsiderCache: true)
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -58,7 +58,7 @@ class PinterestLayout: UICollectionViewLayout {
         return super.shouldInvalidateLayout(forBoundsChange: newBounds)
     }
     
-    private func calculate(shouldConsiderCache: Bool) {
+    private func calculateAttributes(shouldConsiderCache: Bool) {
         if (shouldConsiderCache) {
             cache = [UICollectionViewLayoutAttributes]()
         }
