@@ -50,7 +50,7 @@ class PinterestLayout: UICollectionViewLayout {
 
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         if let oldBounds = self.collectionView?.bounds, oldBounds.size != newBounds.size {
-            calculate(shouldConsiderCache: false)
+            calculateAttributes(shouldConsiderCache: false)
             
             return true
         }
