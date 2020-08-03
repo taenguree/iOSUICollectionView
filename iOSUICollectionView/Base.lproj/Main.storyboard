@@ -39,17 +39,30 @@
                                                         <constraint firstAttribute="height" constant="100" id="waj-7V-w0W"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="caption" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePD-pn-ezw">
+                                                    <rect key="frame" x="4" y="104" width="131" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="QF1-8p-IlR"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="ePD-pn-ezw" secondAttribute="trailing" constant="4" id="Grq-Zv-DWE"/>
                                                 <constraint firstItem="vp8-wW-FZw" firstAttribute="leading" secondItem="JiG-se-0aO" secondAttribute="leading" id="J2D-w3-MC2"/>
                                                 <constraint firstItem="vp8-wW-FZw" firstAttribute="top" secondItem="JiG-se-0aO" secondAttribute="top" id="JxJ-Sr-MNa"/>
                                                 <constraint firstAttribute="trailing" secondItem="vp8-wW-FZw" secondAttribute="trailing" id="bgf-0Z-vsY"/>
+                                                <constraint firstItem="ePD-pn-ezw" firstAttribute="leading" secondItem="JiG-se-0aO" secondAttribute="leading" constant="4" id="h2f-xS-9dS"/>
+                                                <constraint firstItem="ePD-pn-ezw" firstAttribute="top" secondItem="vp8-wW-FZw" secondAttribute="bottom" constant="4" id="qkd-ZC-pQD"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="139" height="155"/>
                                         <connections>
                                             <outlet property="heightConstraint" destination="waj-7V-w0W" id="OjG-dE-zkK"/>
                                             <outlet property="iv_photo" destination="vp8-wW-FZw" id="cks-49-V92"/>
+                                            <outlet property="lb_caption" destination="ePD-pn-ezw" id="3tc-4m-7lB"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

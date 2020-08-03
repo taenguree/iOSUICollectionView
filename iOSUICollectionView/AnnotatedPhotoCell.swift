@@ -12,8 +12,10 @@ import UIKit
 internal class AnnotatedPhotoCell : UICollectionViewCell {
  
     @IBOutlet weak var iv_photo: UIImageView!
+    @IBOutlet weak var lb_caption: UILabel!
+    
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-
+    
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
         

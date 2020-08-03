@@ -105,8 +105,7 @@ class PinterestLayout: UICollectionViewLayout {
             
             for item in 0..<collectionView!.numberOfItems(inSection: 0) {
                 let indexPath = IndexPath(item: item, section: 0)
-                
-//                let height = delegate.collectioinView(collectionView: collectionView!, heightForItemAtIndexPath: indexPath)
+
                 let width = columnWidth - (cellPadding * 2)
                 let photoHeight = delegate.collectioinView(collectionView: collectionView!, heightForPhotoAtIndexPath: indexPath, withWidth: width)
                 let annotationHeight = delegate.collectioinView(collectionView: collectionView!, heightForAnnotationIndexPath: indexPath, withWidth: width)

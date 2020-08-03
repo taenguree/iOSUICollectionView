@@ -7,34 +7,19 @@
 //
 
 import UIKit
+import AVFoundation
 
 internal class ViewController: UIViewController, UICollectionViewDelegate {
     
     @IBOutlet weak var cv_pinterest: UICollectionView!
     
-    var colors: [UIColor] {
-        get {
-            var colors = [UIColor]()
-            let palette = [UIColor.red, UIColor.green, UIColor.blue, UIColor.orange, UIColor.purple, UIColor.yellow]
-            var paletteIndex = 0
-            for i in 0..<20 {
-                colors.append(palette[paletteIndex])
-                
-                if paletteIndex == (palette.count - 1) {
-                    paletteIndex = 0
-                } else {
-                    paletteIndex = paletteIndex + 1
-                }
-            }
-            return colors
-        }
-    }
+    private var photos = Photo.allPhotos()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        self.view.backgroundColor = UIColor.gray
+//        self.view.backgroundColor = UIColor.gray
         
         cv_pinterest.delegate = self
         cv_pinterest.dataSource = self
@@ -52,7 +37,7 @@ internal class ViewController: UIViewController, UICollectionViewDelegate {
 
 extension ViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -64,8 +49,10 @@ extension ViewController : UICollectionViewDataSource {
 
 extension ViewController : PinterestLayoutDelegate {
     func collectioinView(collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
-        let random = arc4random_uniform(4) + 1
-        return CGFloat(random * 100)
+        let photo = photos[indexPath.item]
+        let boundingRect = CGRect(x: 0, y: 0, width: width, height: CGFloat(MAXFLOAT))
+        let rect = AVMakeRect(aspectRatio: photo.size, insideRect: boundingRect)
+        return rect.height
     }
     
     func collectioinView(collectionView: UICollectionView, heightForAnnotationIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
