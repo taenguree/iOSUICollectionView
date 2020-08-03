@@ -16,6 +16,7 @@
 		3456D04824D6F01D00D20997 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3456D04724D6F01D00D20997 /* Photo.swift */; };
 		3456D04C24D6F46500D20997 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3456D04B24D6F46500D20997 /* PinterestLayout.swift */; };
 		3456D04E24D702F500D20997 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3456D04D24D702F500D20997 /* GridLayout.swift */; };
+		3466740D24D84C190052D15B /* AnnotatedPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3466740C24D84C190052D15B /* AnnotatedPhotoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		3456D04724D6F01D00D20997 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		3456D04B24D6F46500D20997 /* PinterestLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
 		3456D04D24D702F500D20997 /* GridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
+		3466740C24D84C190052D15B /* AnnotatedPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedPhotoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				3456D04724D6F01D00D20997 /* Photo.swift */,
 				3456D04B24D6F46500D20997 /* PinterestLayout.swift */,
 				3456D04D24D702F500D20997 /* GridLayout.swift */,
+				3466740C24D84C190052D15B /* AnnotatedPhotoCell.swift */,
 			);
 			path = iOSUICollectionView;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3456D04C24D6F46500D20997 /* PinterestLayout.swift in Sources */,
+				3466740D24D84C190052D15B /* AnnotatedPhotoCell.swift in Sources */,
 				3456D04824D6F01D00D20997 /* Photo.swift in Sources */,
 				3456D03824D6EF0C00D20997 /* ViewController.swift in Sources */,
 				3456D04E24D702F500D20997 /* GridLayout.swift in Sources */,

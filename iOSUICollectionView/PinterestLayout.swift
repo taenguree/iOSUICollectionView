@@ -10,20 +10,47 @@ import UIKit
 
 
 protocol PinterestLayoutDelegate {
-    func collectioinView(collectionView: UICollectionView, heightForItemAtIndexPath indexPath: IndexPath) -> CGFloat
+    func collectioinView(collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat
+    func collectioinView(collectionView: UICollectionView, heightForAnnotationIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat
+}
+
+class PinterestLayoutAttributes: UICollectionViewLayoutAttributes {
+    var photoHeight: CGFloat = 0
+    
+    override func copy(with zone: NSZone? = nil) -> Any {
+        let copy = super.copy(with: zone) as! PinterestLayoutAttributes
+        copy.photoHeight = photoHeight
+        return copy
+    }
+    
+    override func isEqual(_ object: Any?) -> Bool {
+         if let attributes = object as? PinterestLayoutAttributes {
+            if attributes.photoHeight == self.photoHeight {
+                return super.isEqual(object)
+            }
+        }
+        
+        return false
+    }
 }
 
 class PinterestLayout: UICollectionViewLayout {
 
     var delegate: PinterestLayoutDelegate!
     var numberOfColumns = 1
+    var cellPadding: CGFloat = 0
     
-    private var cache = [UICollectionViewLayoutAttributes]()
+    private var cache = [PinterestLayoutAttributes]()
     private var contentHeight: CGFloat = 0
     private var width: CGFloat {
-        return collectionView!.bounds.width
+        let insets = collectionView!.contentInset
+        return collectionView!.bounds.width - (insets.left + insets.right)
     }
  
+    override class var layoutAttributesClass: AnyClass {
+        return PinterestLayoutAttributes.self
+    }
+    
     override var collectionViewContentSize: CGSize {
         return CGSize(width: width, height: contentHeight)
     }
@@ -60,7 +87,7 @@ class PinterestLayout: UICollectionViewLayout {
     
     private func calculateAttributes(shouldConsiderCache: Bool) {
         if (shouldConsiderCache) {
-            cache = [UICollectionViewLayoutAttributes]()
+            cache = [PinterestLayoutAttributes]()
         }
         
         if cache.isEmpty {
@@ -78,11 +105,19 @@ class PinterestLayout: UICollectionViewLayout {
             
             for item in 0..<collectionView!.numberOfItems(inSection: 0) {
                 let indexPath = IndexPath(item: item, section: 0)
-                let height = delegate.collectioinView(collectionView: collectionView!, heightForItemAtIndexPath: indexPath)
+                
+//                let height = delegate.collectioinView(collectionView: collectionView!, heightForItemAtIndexPath: indexPath)
+                let width = columnWidth - (cellPadding * 2)
+                let photoHeight = delegate.collectioinView(collectionView: collectionView!, heightForPhotoAtIndexPath: indexPath, withWidth: width)
+                let annotationHeight = delegate.collectioinView(collectionView: collectionView!, heightForAnnotationIndexPath: indexPath, withWidth: width)
+                let height = cellPadding + photoHeight + annotationHeight + cellPadding
+                
                 let frame = CGRect(x: xOffsets[column], y: yOffsets[column], width: columnWidth, height: height)
-
-                let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-                attributes.frame = frame
+                let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
+                
+                let attributes = PinterestLayoutAttributes(forCellWith: indexPath)
+                attributes.frame = insetFrame
+                attributes.photoHeight = photoHeight
                 
                 cache.append(attributes)
                 
